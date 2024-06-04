@@ -15,9 +15,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/auth' element={<Auth />} />
-          <Route path='movie/:id' element={<Movie/>}/>
-          <Route path='tvshow/:id' element={<TvShow/>}/>
- </Routes>
+          <Route path='movie/:id' element={<Movie />} />
+          <Route path='tvshow/:id' element={<TvShow />} />
+        </Routes>
       </Router>
     </div>
   )

@@ -2,23 +2,26 @@ import { Card, Grid } from "semantic-ui-react";
 import { DisplayType } from ".";
 import { Link } from "react-router-dom";
 
+// Define the interface for the data to be displayed
 interface DisplayData {
     id: number;
     overview: string;
     poster_path: string;
-    title: String;
+    title: string;
     vote_average: number;
     release_date: string;
     name: string;
 }
 
+// Define the interface for the component's props
 interface Props {
     data: DisplayData[];
     displayType: DisplayType;
 }
 
+// Define and export the ColumnDisplay component
 export const ColumnDisplay = (props: Props) => {
-    const { data, displayType } = props
+    const { data, displayType } = props; // Destructure props
 
     return (
         <Grid
@@ -28,6 +31,7 @@ export const ColumnDisplay = (props: Props) => {
             verticalAlign="top"
             padded="vertically"
         >
+            {/* Map over the data array and render each item as a Grid.Column */}
             {data.map((displayData: DisplayData) => (
                 <Grid.Column key={displayData.id}>
                     <Card.Group>
@@ -38,7 +42,7 @@ export const ColumnDisplay = (props: Props) => {
                                 header={displayType === DisplayType.Movies
                                     ? displayData.title
                                     : displayData.name}
-                                meta={`Release Date: ${displayData.release_date} | Ratin: ${displayData.vote_average}`}
+                                meta={`Release Date: ${displayData.release_date} | Rating: ${displayData.vote_average}`}
                                 description={displayData.overview.slice(0, 350) + "..."}
                             />
                         </Link>
