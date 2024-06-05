@@ -3,6 +3,7 @@ import { Button } from 'semantic-ui-react';
 import { ColumnDisplay } from './column-display';
 import { fetchMovies, fetchTvShows } from './query';
 import { useQuery } from '@tanstack/react-query';
+import SearchBar from '../../components/searchBar';
 
 // Define an enumeration for display types
 export enum DisplayType {
@@ -31,8 +32,10 @@ export const Home = () => {
 
     return (
         <div style={{ marginTop: 50, height: "auto" }}>
-            <div>test</div>
             {" "}
+                {/* Search bar */}
+                <SearchBar />
+
             <Button.Group>
                 <Button
                     color={displayType === DisplayType.Movies ? "blue" : undefined}

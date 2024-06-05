@@ -25,7 +25,7 @@ export const ColumnDisplay = (props: Props) => {
 
     return (
         <Grid
-            columns={3}
+            columns={4}
             stackable
             centered
             verticalAlign="top"
@@ -43,7 +43,7 @@ export const ColumnDisplay = (props: Props) => {
                                     ? displayData.title
                                     : displayData.name}
                                 meta={`Release Date: ${displayData.release_date} | Rating: ${displayData.vote_average}`}
-                                description={displayData.overview.slice(0, 350) + "..."}
+                                description={displayData.overview.slice(0, 250) + "..."}
                             />
                         </Link>
                     </Card.Group>
