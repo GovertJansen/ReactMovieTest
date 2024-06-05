@@ -2,7 +2,7 @@
 export const fetchMovies = async () => {
     // Perform the fetch request to the API endpoint for popular movies
     const res = await fetch(
-        "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+        "https://api.themoviedb.org/3/movie/popular?language=en-US",
         {
             headers: {
                 Authorization:
@@ -28,7 +28,7 @@ export const fetchMovies = async () => {
 export const fetchTvShows = async () => {
     // Perform the fetch request to the API endpoint for popular TV shows
     const res = await fetch(
-        "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
+        "https://api.themoviedb.org/3/tv/popular?language=en-US",
         {
             headers: {
                 Authorization:

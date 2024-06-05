@@ -2,7 +2,7 @@
 export const fetchMoviesDetails = async (movieId: string) => {
     // Perform the fetch request to the API endpoint for the specified movie ID
     const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}?language=en-US&page=1`,
+        `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
         {
             headers: {
                 Authorization:

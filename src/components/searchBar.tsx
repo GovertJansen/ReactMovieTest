@@ -1,5 +1,4 @@
-// export default SearchBar;
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent, FormEvent } from 'react';
 import { Menu, Card, Grid, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
@@ -19,6 +18,8 @@ const SearchBar: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     // State to hold the results fetched from the API
     const [results, setResults] = useState<DisplayData[]>([]);
+    // Ref for the results container
+    const resultsRef = useRef<HTMLDivElement>(null);
 
     // Function to handle changes in the search input
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -51,13 +52,28 @@ const SearchBar: React.FC = () => {
         };
 
         // Fetch movies from the API
-        fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`, options)
+        fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`, options)
             .then(response => response.json())
             .then(response => {
                 setResults(response.results || []);
             })
             .catch(err => console.error(err));
     };
+
+    // Function to handle clicks outside the results container
+    const handleClickOutside = (event: MouseEvent) => {
+        if (resultsRef.current && !resultsRef.current.contains(event.target as Node)) {
+            setResults([]);
+        }
+    };
+
+    // Adding event listener to detect clicks outside the results container
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true);
+        };
+    }, []);
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%' }}>
@@ -77,20 +93,22 @@ const SearchBar: React.FC = () => {
             </Menu>
             {/* Display search results */}
             {results.length > 0 && (
-                <div style={{
-                    position: 'absolute',
-                    top: '120px', // Adjust based on your navbar height
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: '80%',
-                    maxHeight: '800px', // Increased height
-                    overflowY: 'auto',
-                    background: 'white',
-                    zIndex: 1000,
-                    padding: '1rem',
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                    borderRadius: '8px',
-                }}>
+                <div
+                    ref={resultsRef}
+                    style={{
+                        position: 'absolute',
+                        top: '120px', // Adjust based on your navbar height
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '80%',
+                        maxHeight: '800px', // Increased height
+                        overflowY: 'auto',
+                        background: 'white',
+                        zIndex: 1000,
+                        padding: '1rem',
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                        borderRadius: '8px',
+                    }}>
                     <Grid columns={3} stackable centered verticalAlign="top" padded="vertically">
                         {results.map((displayData: DisplayData) => (
                             <Grid.Column key={displayData.id} style={{ padding: '0.5rem' }}>

@@ -48,20 +48,32 @@ export const TvShow = () => {
                         <GridColumn width={10}>
                             <List>
                                 <ListItem>
+                                    <List.Header>Release Date: </List.Header>
+                                    {data.first_air_date}
+                                </ListItem>
+                                <ListItem>
+                                    <List.Header>Genres: </List.Header>
+                                    {data.genres.map((genre: any) => <Label key={genre.id}>{genre.name}</Label>)}
+                                </ListItem>
+                                <ListItem>
                                     <List.Header>Description: </List.Header>
                                     {data.overview}
                                 </ListItem>
                                 <ListItem>
-                                    <List.Header>Is TV Show For Adults:</List.Header>
-                                    {data.adult ? "Yes" : "No"}
-                                </ListItem>
-                                <ListItem>
-                                    <List.Header>Seasons:</List.Header>
+                                    <List.Header>Seasons: </List.Header>
                                     {data.number_of_seasons}
                                 </ListItem>
                                 <ListItem>
-                                    <List.Header>Genres:</List.Header>
-                                    {data.genres.map((genre: any) => <Label key={genre.id}>{genre.name}</Label>)}
+                                    <List.Header>Episodes: </List.Header>
+                                    {data.number_of_episodes}
+                                </ListItem>
+                                <ListItem>
+                                    <List.Header>Rating: </List.Header>
+                                    {data.vote_average.toFixed(1)}
+                                </ListItem>
+                                <ListItem>
+                                    <List.Header>Language: </List.Header>
+                                    {data.original_language}
                                 </ListItem>
                                 <ListItem>
                                     <List.Header>Networks: </List.Header>
