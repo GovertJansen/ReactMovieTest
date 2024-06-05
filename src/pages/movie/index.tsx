@@ -68,7 +68,7 @@ export const Movie = () => {
                                 </ListItem>
                                 <ListItem>
                                     <ListHeader>Director: </ListHeader>
-                                    {creditsData?.crew?.find((member: any) => member.job === "Director")?.name ?? "N/A"}
+                                    {creditsData.crew.find((member: any) => member.job === "Director").name ?? "N/A"}
                                 </ListItem>
                                 <ListItem>
                                     <ListHeader>Duration: </ListHeader>

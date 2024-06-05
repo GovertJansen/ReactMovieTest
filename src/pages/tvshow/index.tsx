@@ -57,7 +57,7 @@ export const TvShow = () => {
                                 </ListItem>
                                 <ListItem>
                                     <List.Header>Description: </List.Header>
-                                    {data.overview}
+                                    {data.overview || "N/A"}
                                 </ListItem>
                                 <ListItem>
                                     <List.Header>Seasons: </List.Header>
