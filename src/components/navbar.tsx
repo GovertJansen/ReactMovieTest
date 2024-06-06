@@ -1,6 +1,5 @@
 import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-// import SearchBar from "./searchBar";
 
 // Define and export the Navbar component
 export const Navbar = () => {

@@ -10,12 +10,14 @@ interface DisplayData {
     title: string;
     vote_average: number;
     release_date: string;
-    name?: string; // TV shows might use the name field instead of title
+    name?: string;
 }
 
 const SearchBar: React.FC = () => {
     // State to hold the search term entered by the user
     const [searchTerm, setSearchTerm] = useState<string>('');
+    // State to hold the debounced search term
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');
     // State to hold the results fetched from the API
     const [results, setResults] = useState<DisplayData[]>([]);
     // Ref for the results container
@@ -25,12 +27,6 @@ const SearchBar: React.FC = () => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchTerm(value);
-
-        if (value) {
-            fetchMovies(value);
-        } else {
-            setResults([]);
-        }
     };
 
     // Function to handle form submission
@@ -47,7 +43,7 @@ const SearchBar: React.FC = () => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZjFkOWEzZjkwMmI5YTg5MDEwMzQxMTc1N2IzZmVkOSIsInN1YiI6IjY2NTVlODBkMzljNjllZGZkN2U0YmRlMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iRY7v-s_RMNitwzNsHJ6JsvxCrZlapPlSTswRYySWVc'
+                Authorization: import.meta.env.VITE_API_HEADER
             }
         };
 
@@ -59,6 +55,24 @@ const SearchBar: React.FC = () => {
             })
             .catch(err => console.error(err));
     };
+
+    // Debounce the search term
+    useEffect(() => {
+        const delayInputTimeoutId = setTimeout(() => {
+            setDebouncedSearchTerm(searchTerm);
+        }, 500);
+
+        return () => clearTimeout(delayInputTimeoutId);
+    }, [searchTerm]);
+
+    // Fetch movies when the debounced search term changes
+    useEffect(() => {
+        if (debouncedSearchTerm) {
+            fetchMovies(debouncedSearchTerm);
+        } else {
+            setResults([]);
+        }
+    }, [debouncedSearchTerm]);
 
     // Function to handle clicks outside the results container
     const handleClickOutside = (event: MouseEvent) => {

@@ -6,7 +6,7 @@ export const mutationLogin = async () => {
         {
             headers: {
                 Authorization:
-                    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZjFkOWEzZjkwMmI5YTg5MDEwMzQxMTc1N2IzZmVkOSIsInN1YiI6IjY2NTVlODBkMzljNjllZGZkN2U0YmRlMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iRY7v-s_RMNitwzNsHJ6JsvxCrZlapPlSTswRYySWVc'
+                    import.meta.env.VITE_API_HEADER
             },
         }
     );
@@ -18,7 +18,7 @@ export const mutationLogin = async () => {
 
     // Parse the response JSON data
     const data = await res.json();
-    console.log(data);  // Log the data to the console after reading the JSON body
+    console.table(data);  // Log the data to the console after reading the JSON body
 
     // Return the parsed data
     return data;

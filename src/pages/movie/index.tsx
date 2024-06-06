@@ -87,7 +87,6 @@ export const Movie = () => {
                                         <ListHeader>Box Office: </ListHeader>
                                         ${movieData.revenue.toLocaleString()}
                                     </ListItem>
-
                                 </ListItem>
 
                             </List>
