@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { Button } from 'semantic-ui-react';
-import { ColumnDisplay } from './columnDisplay';
-import { fetchMovies, fetchTvShows } from './queryPopular';
+import { Button, Loader } from 'semantic-ui-react';
+import { MovieColumnDisplay } from './Movies/movieColumnDisplay';
+import { TVShowColumnDisplay } from './tvShows/tvShowColumnDisplay';
+import { fetchMovies } from './Movies/queryPopularMovies';
+import { fetchTvShows } from './tvShows/queryPopularTvShows';
+
 import { useQuery } from '@tanstack/react-query';
 import SearchBar from '../../components/searchBar';
 
@@ -30,11 +33,15 @@ export const Home = () => {
         queryFn: fetchTvShows // Function to fetch TV shows data
     });
 
+    // Show loading indicator if either movies or TV shows are loading
+    if (isLoadingMovies || isLoadingTvShows) {
+        return <Loader active>Loading...</Loader>;
+    }
+
     return (
         <div style={{ marginTop: 50, height: "auto" }}>
-            {" "}
-                {/* Search bar */}
-                <SearchBar />
+            {/* Search bar */}
+            <SearchBar />
 
             <Button.Group>
                 <Button
@@ -51,19 +58,14 @@ export const Home = () => {
                 </Button>
             </Button.Group>
 
-            {/* Show loading indicator if either movies or TV shows are loading */}
-            {isLoadingMovies || isLoadingTvShows ? (
-                <div>Loading...</div>
-            ) : (
-                <div style={{ marginTop: 20 }}>
-                    {/* Conditionally render ColumnDisplay based on displayType */}
-                    {displayType === DisplayType.Movies ? (
-                        <ColumnDisplay data={movieData.results} displayType={DisplayType.Movies} />
-                    ) : (
-                        <ColumnDisplay data={tvShowData.results} displayType={DisplayType.TvShows} />
-                    )}
-                </div>
-            )}
+            {/* Conditionally render MovieColumnDisplay or TVShowColumnDisplay based on displayType */}
+            <div style={{ marginTop: 20 }}>
+                {displayType === DisplayType.Movies ? (
+                    <MovieColumnDisplay data={movieData.results} />
+                ) : (
+                    <TVShowColumnDisplay data={tvShowData.results} />
+                )}
+            </div>
         </div>
     );
-}
+};
