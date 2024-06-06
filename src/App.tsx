@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Navbar } from './components/navbar';
-import { Auth } from './pages/auth';
+import { Auth } from './pages/auth/loginPage';
 import { Home } from './pages/home';
-import { Movie } from './pages/movie';
-import { TvShow } from './pages/tvshow';
+import { Movie } from './pages/movie/movieCard';
+import { TvShow } from './pages/tvshow/tvShowCard';
 
 
 function App() {

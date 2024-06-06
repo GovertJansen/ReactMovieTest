@@ -16,7 +16,7 @@ export const Navbar = () => {
             <Menu.Menu position="right">
                 {/* Menu item that links to the authentication page */}
                 <Menu.Item as={Link} to='/auth' style={{ fontSize: "1.5rem" }}>
-                    Auth
+                    Login as guest
                 </Menu.Item>
             </Menu.Menu>
 

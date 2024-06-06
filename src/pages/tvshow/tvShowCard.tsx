@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Grid, GridColumn, Header, Loader, Segment, Image, List, ListItem, Label } from "semantic-ui-react";
-import { fetchTvShowDetails } from "./query";
+import { fetchTvShowDetails } from "./queryTvShowDetails";
 
 // Define and export the TvShow component
 export const TvShow = () => {

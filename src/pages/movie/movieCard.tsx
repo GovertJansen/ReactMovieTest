@@ -2,8 +2,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Grid, GridColumn, Header, Loader, Segment, Image, List, ListItem, Label, ListHeader } from "semantic-ui-react";
-import { fetchMoviesDetails } from "./queryDetails";
-import { fetchMovieCredits } from "./queryCredits";
+import { fetchMoviesDetails } from "./queryMovieDetails";
+import { fetchMovieCredits } from "./queryMovieCredits";
 
 // Define and export the Movie component
 export const Movie = () => {

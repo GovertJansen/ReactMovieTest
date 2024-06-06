@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'semantic-ui-react';
-import { ColumnDisplay } from './column-display';
-import { fetchMovies, fetchTvShows } from './query';
+import { ColumnDisplay } from './columnDisplay';
+import { fetchMovies, fetchTvShows } from './queryPopular';
 import { useQuery } from '@tanstack/react-query';
 import SearchBar from '../../components/searchBar';
 
